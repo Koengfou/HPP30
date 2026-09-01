@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Huppeltijd — het DNA van de HPP</title>
+<meta name="theme-color" content="#0d4a5c">
+<meta name="description" content="Audiogids en toelichting bij de werken van de expo 'Huppeltijd, het DNA van de HPP'.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     INSTELLINGEN — dit is het ENIGE dat je ooit moet aanpassen.
+     Plak hieronder de CSV-link van je gepubliceerde Google Sheet.
+     (In Google Sheets: Bestand → Delen → Publiceren op internet →
+      blad kiezen → Kommagescheiden waarden (.csv) → Publiceren)
+     ═══════════════════════════════════════════════════════════════════ -->
+<script>
+window.HPP_CONFIG = {
+  SHEET_CSV_URL:   "PLAK_HIER_JE_GOOGLE_SHEET_CSV_LINK",
+  EXPO_TITEL:      "Huppeltijd",
+  EXPO_ONDERTITEL: "het DNA van de HPP",
+  AANTAL_WERKEN:   30
+};
+</script>
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+
+<style>
+/* ============================================================
+   KLEURPALET  (steampunk · brass + teal)  — Huppeltijd
+============================================================ */
+:root{
+  --teal-dark:#0d4a5c;
+  --teal:#1f7b94;
+  --teal-light:#3ea6c2;
+  --paper:#f4e6c4;
+  --paper-dim:#d8c69a;
+  --ink:#2a1a0c;
+  --brass:#e6b85a;
+  --brass-mid:#c89030;
+  --brass-deep:#8a5c1c;
+  --copper:#b1693a;
+  --copper-deep:#6f3a1b;
+  --shadow:rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  color:var(--paper);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.62;
+  background:
+    radial-gradient(ellipse at 30% 20%, #2c92ab 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, #0a3c4d 0%, transparent 60%),
+    linear-gradient(135deg,#0d4a5c 0%,#1f7b94 50%,#0d4a5c 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+/* zacht DNA/tandwiel-patroon over de achtergrond */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.14;
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke='%23e6b85a' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M28 8c0 17 38 17 38 34S28 59 28 76s38 17 38 34-38 17-38 34'/%3E%3Cpath d='M66 8c0 17-38 17-38 34s38 17 38 34-38 17-38 34 38 17 38 34'/%3E%3Cpath d='M33 20h28M29 32h36M29 62h36M33 74h28M29 86h36M33 128h28'/%3E%3Ccircle cx='115' cy='40' r='15'/%3E%3Ccircle cx='115' cy='40' r='5'/%3E%3Cpath d='M115 22v-6M115 64v-6M133 40h6M97 40h-6M128 27l4-4M102 53l-4 4M128 53l4 4M102 27l-4-4'/%3E%3Ccircle cx='112' cy='108' r='11'/%3E%3Cpath d='M112 97v-5M112 124v-5M123 108h5M101 108h-5'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:300px 300px;
+}
+.wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:0 18px 64px}
+
+/* ── koppen ─────────────────────────────────────────── */
+h1,h2,h3{
+  font-family:"Playfair Display",Georgia,serif;
+  letter-spacing:.03em;margin:0 0 .4em;color:var(--brass);
+  text-shadow:0 1px 0 #000,0 2px 8px rgba(0,0,0,.6),0 0 22px rgba(230,184,90,.35);
+}
+
+/* ── kopbalk ────────────────────────────────────────── */
+header{padding:26px 0 22px;text-align:center}
+header a{text-decoration:none;display:inline-flex;flex-direction:column;align-items:center;gap:4px}
+.wordmark{
+  font-family:"Playfair Display",Georgia,serif;
+  font-weight:900;color:var(--brass);
+  font-size:clamp(26px,8vw,38px);line-height:1;letter-spacing:.04em;
+  text-shadow:0 1px 0 #000,0 2px 8px rgba(0,0,0,.6),0 0 22px rgba(230,184,90,.35);
+}
+.wordmark::before,.wordmark::after{
+  content:"✦";margin:0 .4em;color:var(--brass-deep);font-size:.5em;
+  vertical-align:middle;text-shadow:none;
+}
+.tagline{
+  font-family:"Courier New",monospace;font-size:12.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--paper-dim);
+}
+.rule{
+  height:3px;margin:18px auto 26px;max-width:340px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--brass-deep) 15%,var(--brass) 50%,var(--brass-deep) 85%,transparent);
+  box-shadow:0 1px 0 rgba(0,0,0,.6);
+}
+
+/* ── plaat ──────────────────────────────────────────── */
+.plaque{
+  position:relative;
+  background:linear-gradient(180deg,#1a3a48 0%,#0d2934 100%);
+  border:2px solid var(--brass-deep);border-radius:12px;
+  padding:34px 26px 30px;
+  box-shadow:inset 0 1px 0 rgba(230,184,90,.18),inset 0 -2px 18px rgba(0,0,0,.55),0 18px 50px rgba(0,0,0,.55);
+}
+.plaque::before,.plaque::after,.plaque .rivet-bl,.plaque .rivet-br{
+  content:"";position:absolute;width:13px;height:13px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#f4d27f,#8a5c1c 70%,#3a2410 100%);
+  box-shadow:0 1px 0 #000,inset 0 -1px 2px rgba(0,0,0,.5);
+}
+.plaque::before{top:9px;left:11px}
+.plaque::after{top:9px;right:11px}
+.plaque .rivet-bl{bottom:9px;left:11px}
+.plaque .rivet-br{bottom:9px;right:11px}
+
+/* ── werk ───────────────────────────────────────────── */
+.pill{
+  display:inline-block;position:relative;
+  background:radial-gradient(ellipse at 30% 20%,#f4d27f 0%,#c89030 50%,#6e4814 100%);
+  color:var(--ink);border:2px solid var(--brass-deep);border-radius:30px;
+  padding:5px 20px;font-family:"Courier New",monospace;font-weight:bold;
+  font-size:17px;letter-spacing:.12em;margin-bottom:16px;
+  box-shadow:inset 0 1px 0 rgba(255,240,200,.5),inset 0 -2px 4px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.5);
+}
+h1.werk{font-size:clamp(26px,7.5vw,38px);line-height:1.12;text-align:left;margin:0 0 8px}
+.maker{
+  font-family:"Courier New",monospace;font-size:13.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--paper-dim);margin:0 0 24px;
+}
+
+.media{margin:0 0 24px}
+.label{
+  font-family:"Courier New",monospace;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 10px;
+}
+.frame{
+  position:relative;background:#0a2530;
+  border:8px solid;
+  border-image:linear-gradient(135deg,#e6b85a,#8a5c1c,#e6b85a,#6f3a1b) 1;
+  padding:6px;
+  box-shadow:inset 0 0 0 1px #2a1a0c,0 16px 40px rgba(0,0,0,.55);
+}
+.frame::before,.frame::after,.frame .corner-bl,.frame .corner-br{
+  content:"";position:absolute;width:18px;height:18px;border-radius:50%;z-index:2;
+  background:radial-gradient(circle at 30% 30%,#f4d27f 0%,#8a5c1c 70%,#3a2410 100%);
+  box-shadow:0 1px 0 #000,inset 0 -2px 3px rgba(0,0,0,.45);
+}
+.frame::before{top:-5px;left:-5px}
+.frame::after{top:-5px;right:-5px}
+.frame .corner-bl{bottom:-5px;left:-5px}
+.frame .corner-br{bottom:-5px;right:-5px}
+.frame .binnen{position:relative;width:100%;display:block}
+.frame.video .binnen{aspect-ratio:16/9}
+.frame.audio .binnen{height:70px}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+/* ── audiospeler (in huisstijl) ─────────────────────── */
+.speler{
+  display:flex;align-items:center;gap:14px;
+  background:linear-gradient(180deg,#1a3a48 0%,#0d2934 100%);
+  border:2px solid var(--brass-deep);border-radius:40px;
+  padding:8px 20px 8px 8px;
+  box-shadow:inset 0 1px 0 rgba(230,184,90,.2),0 8px 22px rgba(0,0,0,.5);
+}
+.speler .knop{
+  flex:none;width:50px;height:50px;border-radius:50%;cursor:pointer;
+  border:2px solid var(--copper-deep);
+  background:radial-gradient(ellipse at 30% 20%,#f4d27f 0%,#c89030 52%,#6e4814 100%);
+  display:flex;align-items:center;justify-content:center;padding:0;
+  box-shadow:inset 0 1px 0 rgba(255,240,200,.55),inset 0 -2px 4px rgba(0,0,0,.3),0 3px 9px rgba(0,0,0,.5);
+  transition:transform .08s,filter .15s;
+}
+.speler .knop:active{transform:translateY(2px)}
+.speler .knop svg{width:19px;height:19px;fill:var(--ink);pointer-events:none}
+.speler .baan{
+  flex:1;height:9px;border-radius:5px;cursor:pointer;position:relative;
+  background:#0a2530;border:1px solid rgba(230,184,90,.3);overflow:hidden;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.6);
+}
+.speler .vulling{
+  position:absolute;inset:0 auto 0 0;width:0;
+  background:linear-gradient(90deg,#8a5c1c,#e6b85a);
+}
+.speler .tijd{
+  font-family:"Courier New",monospace;font-size:12.5px;color:var(--paper-dim);
+  min-width:44px;text-align:right;font-variant-numeric:tabular-nums;
+}
+audio{display:none}
+video{width:100%;display:block;background:#000}
+.frame img{width:100%;display:block}
+
+.tekst{font-size:17.5px;color:var(--paper)}
+.tekst p{margin:0 0 1.05em}
+.tekst p:last-child{margin-bottom:0}
+
+/* ── knop ───────────────────────────────────────────── */
+.btn{
+  appearance:none;cursor:pointer;display:inline-block;text-decoration:none;
+  background:linear-gradient(180deg,#f4d27f 0%,#c89030 55%,#8a5c1c 100%);
+  color:var(--ink);border:2px solid var(--copper-deep);border-radius:8px;
+  padding:12px 28px;font-family:Georgia,serif;font-weight:bold;font-size:15px;
+  letter-spacing:.1em;text-transform:uppercase;
+  box-shadow:inset 0 1px 0 rgba(255,240,200,.55),inset 0 -2px 0 rgba(0,0,0,.25),0 5px 0 #3a2410,0 10px 22px rgba(0,0,0,.45);
+  transition:transform .08s,box-shadow .08s,filter .15s;
+}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,240,200,.55),inset 0 -2px 0 rgba(0,0,0,.25),0 2px 0 #3a2410,0 5px 12px rgba(0,0,0,.45)}
+.knoprij{text-align:center;margin-top:34px}
+
+/* ── leeg / fout ────────────────────────────────────── */
+.leeg{text-align:center;padding:14px 0 6px}
+.leeg .zegel{
+  width:74px;height:74px;border-radius:50%;margin:0 auto 20px;
+  border:2px dashed var(--brass-deep);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--brass-deep);font-size:30px;font-family:"Playfair Display",serif;
+}
+.leeg h2{font-size:24px;margin:0 0 10px}
+.leeg p{color:var(--paper-dim);font-size:16px;margin:0 auto;max-width:36ch}
+
+/* ── overzicht ──────────────────────────────────────── */
+.intro{
+  color:var(--paper-dim);font-size:16px;margin:0 0 22px;text-align:center;
+}
+ul.lijst{list-style:none;margin:0;padding:0}
+ul.lijst li + li{border-top:1px solid rgba(230,184,90,.22)}
+ul.lijst a{display:flex;align-items:baseline;gap:15px;padding:14px 2px;color:var(--paper);text-decoration:none}
+ul.lijst a:active{color:var(--brass)}
+ul.lijst .n{
+  color:var(--brass);font-family:"Courier New",monospace;font-weight:bold;
+  font-size:14px;letter-spacing:.08em;min-width:28px;flex:none;font-variant-numeric:tabular-nums;
+}
+ul.lijst .t{font-family:"Playfair Display",Georgia,serif;font-size:19px;line-height:1.3;color:var(--brass)}
+ul.lijst .m{
+  display:block;color:var(--paper-dim);font-family:"Courier New",monospace;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin-top:3px;
+}
+
+footer{
+  margin-top:34px;text-align:center;color:var(--paper-dim);
+  font-family:"Courier New",monospace;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+}
+.spinner{
+  width:26px;height:26px;margin:90px auto;
+  border:3px solid rgba(230,184,90,.25);border-top-color:var(--brass);
+  border-radius:50%;animation:sp .9s linear infinite;
+}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spinner{animation:none}}
+@media (max-width:400px){ .plaque{padding:30px 18px 26px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="./" aria-label="Naar het overzicht">
+      <span class="wordmark" id="hdr-titel">Huppeltijd</span>
+      <span class="tagline" id="hdr-sub">het DNA van de HPP</span>
+    </a>
+  </header>
+  <div class="rule"></div>
+
+  <main id="app"><div class="spinner" role="status" aria-label="Laden"></div></main>
+
+  <footer id="voet"></footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var CFG = window.HPP_CONFIG || {};
+  var app = document.getElementById("app");
+
+  document.getElementById("hdr-titel").textContent = CFG.EXPO_TITEL || "Huppeltijd";
+  document.getElementById("hdr-sub").textContent   = CFG.EXPO_ONDERTITEL || "";
+  document.getElementById("voet").textContent      = "Een HuPPelTijd-expo 2026";
+
+  /* ---------- hulpjes ---------- */
+  function esc(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;");
+  }
+  function param(){
+    var q = new URLSearchParams(location.search);
+    var v = q.get("w") || q.get("werk") || q.get("code") || q.get("id");
+    if(!v && location.hash) v = location.hash.replace(/^#/,"");
+    return v ? String(v).trim() : "";
+  }
+  function nrKey(v){
+    var m = String(v == null ? "" : v).trim().match(/\d+/);
+    return m ? String(parseInt(m[0],10)) : "";
+  }
+  function pad(n){ return String(n).length < 2 ? "0"+n : String(n); }
+  function plaat(inner){
+    return '<div class="plaque"><span class="rivet-bl"></span><span class="rivet-br"></span>'+inner+'</div>';
+  }
+
+  /* ---------- CSV-parser (met aanhalingstekens en regeleindes in cellen) ---------- */
+  function parseCSV(text){
+    text = text.replace(/^﻿/,"");
+    var rows=[], row=[], cur="", q=false, i=0, c, n;
+    for(; i<text.length; i++){
+      c = text[i];
+      if(q){
+        if(c === '"'){ n = text[i+1]; if(n === '"'){ cur += '"'; i++; } else { q = false; } }
+        else cur += c;
+      } else {
+        if(c === '"') q = true;
+        else if(c === ","){ row.push(cur); cur=""; }
+        else if(c === "\n"){ row.push(cur); rows.push(row); row=[]; cur=""; }
+        else if(c === "\r"){ /* negeer */ }
+        else cur += c;
+      }
+    }
+    if(cur !== "" || row.length){ row.push(cur); rows.push(row); }
+    return rows;
+  }
+
+  var ALIAS = {
+    "nummer":"nummer","nr":"nummer","code":"nummer","werk":"nummer","#":"nummer",
+    "titel":"titel","title":"titel","naam":"titel",
+    "kunstenaar":"kunstenaar","maker":"kunstenaar","artiest":"kunstenaar","auteur":"kunstenaar",
+    "tekst":"tekst","uitleg":"tekst","beschrijving":"tekst","toelichting":"tekst",
+    "audio":"audio","geluid":"audio","audiolink":"audio",
+    "video":"video","film":"video","videolink":"video",
+    "afbeelding":"afbeelding","foto":"afbeelding","beeld":"afbeelding","image":"afbeelding",
+    "actief":"actief","zichtbaar":"actief","aan":"actief","publiceren":"actief"
+  };
+
+  function toObjects(rows){
+    if(!rows.length) return [];
+    var head = rows[0].map(function(h){
+      var k = String(h).trim().toLowerCase().replace(/\s+/g," ");
+      return ALIAS[k] || k;
+    });
+    var out=[];
+    for(var r=1;r<rows.length;r++){
+      var o={}, leeg=true;
+      for(var c=0;c<head.length;c++){
+        var v = (rows[r][c] == null ? "" : String(rows[r][c])).trim();
+        o[head[c]] = v;
+        if(v) leeg = false;
+      }
+      if(!leeg) out.push(o);
+    }
+    return out;
+  }
+
+  function actief(o){
+    var v = (o.actief||"").trim().toLowerCase();
+    if(v === "") return true;                 // kolom leeg of afwezig = gewoon tonen
+    return !/^(nee|neen|nvt|nb|off|uit|no|false|0|verborgen)$/.test(v);
+  }
+  function heeftInhoud(o){
+    return !!(o && actief(o) && ((o.tekst||"").trim() || (o.audio||"").trim() || (o.video||"").trim() || (o.afbeelding||"").trim()));
+  }
+
+  /* ---------- media-links herkennen ---------- */
+  function driveId(u){
+    var m = u.match(/\/file\/d\/([A-Za-z0-9_-]{10,})/) ||
+            u.match(/[?&]id=([A-Za-z0-9_-]{10,})/) ||
+            u.match(/\/d\/([A-Za-z0-9_-]{10,})/);
+    return m ? m[1] : null;
+  }
+  function youtubeId(u){
+    var m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+    return m ? m[1] : null;
+  }
+  function vimeoId(u){
+    var m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    return m ? m[1] : null;
+  }
+
+  function bron(url, voorkeur){
+    url = (url||"").trim();
+    if(!url) return null;
+    var yt = youtubeId(url);
+    if(yt) return {soort:"iframe", src:"https://www.youtube-nocookie.com/embed/"+yt+"?rel=0&modestbranding=1", vorm:"video"};
+    var vi = vimeoId(url);
+    if(vi) return {soort:"iframe", src:"https://player.vimeo.com/video/"+vi, vorm:"video"};
+    if(/drive\.google\.com|docs\.google\.com/.test(url)){
+      var id = driveId(url);
+      if(id) return {soort:"iframe", src:"https://drive.google.com/file/d/"+id+"/preview", vorm:(voorkeur === "audio" ? "audio" : "video")};
+    }
+    if(/soundcloud\.com/.test(url))
+      return {soort:"iframe", src:"https://w.soundcloud.com/player/?url="+encodeURIComponent(url)+"&color=%23e6b85a&hide_related=true", vorm:"audio"};
+    if(/\.(mp3|m4a|aac|wav|ogg|oga)(\?|#|$)/i.test(url)) return {soort:"audio", src:url};
+    if(/\.(mp4|webm|ogv|mov|m4v)(\?|#|$)/i.test(url)) return {soort:"video", src:url};
+    if(/\.(jpe?g|png|webp|gif|avif)(\?|#|$)/i.test(url)) return {soort:"beeld", src:url};
+    if(/^https?:\/\//i.test(url)) return {soort:"link", src:url};
+    return null;
+  }
+
+  var ICOON_PLAY  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5v17l15-8.5z"/></svg>';
+  var ICOON_PAUZE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5h5v17H5zm9 0h5v17h-5z"/></svg>';
+
+  function klok(s){
+    if(!isFinite(s) || s < 0) s = 0;
+    var m = Math.floor(s/60), r = Math.floor(s%60);
+    return m + ":" + (r < 10 ? "0"+r : r);
+  }
+
+  function spelersActiveren(){
+    Array.prototype.forEach.call(document.querySelectorAll(".speler"), function(sp){
+      if(sp.dataset.klaar) return;
+      sp.dataset.klaar = "1";
+      var a = sp.querySelector("audio"),
+          knop = sp.querySelector(".knop"),
+          baan = sp.querySelector(".baan"),
+          vul  = sp.querySelector(".vulling"),
+          tijd = sp.querySelector(".tijd");
+
+      function teken(){
+        var d = a.duration;
+        vul.style.width = (isFinite(d) && d > 0 ? (a.currentTime/d*100) : 0) + "%";
+        tijd.textContent = klok(isFinite(d) && d > 0 && a.currentTime > 0 ? d - a.currentTime : d);
+      }
+      function spring(e){
+        var r = baan.getBoundingClientRect(),
+            x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left,
+            p = Math.min(1, Math.max(0, x / r.width));
+        if(isFinite(a.duration)) a.currentTime = p * a.duration;
+      }
+
+      knop.addEventListener("click", function(){
+        if(a.paused){
+          // andere spelers stoppen
+          Array.prototype.forEach.call(document.querySelectorAll(".speler audio"), function(x){ if(x !== a) x.pause(); });
+          a.play();
+        } else a.pause();
+      });
+      a.addEventListener("play",  function(){ knop.innerHTML = ICOON_PAUZE; knop.setAttribute("aria-label","Pauzeren"); });
+      a.addEventListener("pause", function(){ knop.innerHTML = ICOON_PLAY;  knop.setAttribute("aria-label","Afspelen"); });
+      a.addEventListener("ended", function(){ knop.innerHTML = ICOON_PLAY; a.currentTime = 0; teken(); });
+      a.addEventListener("timeupdate", teken);
+      a.addEventListener("loadedmetadata", teken);
+      baan.addEventListener("click", spring);
+      teken();
+    });
+  }
+
+  function inFrame(vorm, inhoud){
+    return '<div class="frame '+vorm+'"><span class="corner-bl"></span><span class="corner-br"></span>'+
+           '<span class="binnen">'+inhoud+'</span></div>';
+  }
+
+  function mediaHTML(url, voorkeur, label){
+    var b = bron(url, voorkeur);
+    if(!b) return "";
+    var kop = label ? '<p class="label">'+esc(label)+'</p>' : "";
+    if(b.soort === "iframe")
+      return '<div class="media">'+kop+inFrame(b.vorm||"video",
+        '<iframe src="'+esc(b.src)+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>')+'</div>';
+    if(b.soort === "audio")
+      return '<div class="media">'+kop+
+        '<div class="speler">'+
+          '<button class="knop" type="button" aria-label="Afspelen">'+ICOON_PLAY+'</button>'+
+          '<div class="baan" role="slider" aria-label="Positie in de opname" tabindex="0"><span class="vulling"></span></div>'+
+          '<span class="tijd">0:00</span>'+
+          '<audio preload="metadata" src="'+esc(b.src)+'"></audio>'+
+        '</div></div>';
+    if(b.soort === "video")
+      return '<div class="media">'+kop+inFrame("", '<video controls preload="metadata" playsinline src="'+esc(b.src)+'"></video>')+'</div>';
+    if(b.soort === "beeld")
+      return '<div class="media">'+kop+inFrame("", '<img src="'+esc(b.src)+'" alt="" loading="lazy">')+'</div>';
+    return '<div class="media">'+kop+'<a class="btn" href="'+esc(b.src)+'" target="_blank" rel="noopener">Openen</a></div>';
+  }
+
+  function tekstHTML(t){
+    if(!t) return "";
+    var stukken = String(t).split(/\n+/).filter(function(s){ return s.trim(); });
+    return '<div class="tekst">'+stukken.map(function(p){ return "<p>"+esc(p)+"</p>"; }).join("")+"</div>";
+  }
+
+  /* ---------- schermen ---------- */
+  function toonLeeg(nr, titel, boodschap, teken){
+    app.innerHTML = plaat(
+      '<div class="leeg"><div class="zegel">'+(teken || "✦")+'</div>'+
+      '<h2>'+esc(titel)+'</h2><p>'+esc(boodschap)+'</p></div>'
+    ) + '<div class="knoprij"><a class="btn" href="./">Alle werken</a></div>';
+    document.title = (CFG.EXPO_TITEL||"Huppeltijd") + " — " + (CFG.EXPO_ONDERTITEL||"");
+  }
+
+  function toonWerk(o, nr){
+    var h = "";
+    h += '<span class="pill">Nr. '+esc(pad(nr))+'</span>';
+    h += '<h1 class="werk">'+esc(o.titel || ("Werk "+pad(nr)))+'</h1>';
+    if(o.kunstenaar) h += '<p class="maker">'+esc(o.kunstenaar)+'</p>';
+    if(o.afbeelding) h += mediaHTML(o.afbeelding, "beeld", "");
+    if(o.audio)      h += mediaHTML(o.audio, "audio", "Luister");
+    if(o.video)      h += mediaHTML(o.video, "video", "Bekijk");
+    if(o.tekst)      h += tekstHTML(o.tekst);
+    app.innerHTML = plaat(h) + '<div class="knoprij"><a class="btn" href="./">Alle werken</a></div>';
+    spelersActiveren();
+    document.title = (o.titel ? o.titel + " — " : "") + (CFG.EXPO_TITEL||"Huppeltijd");
+  }
+
+  function toonOverzicht(werken){
+    var items = werken.filter(heeftInhoud);
+    if(!items.length){
+      toonLeeg(null, "Nog niets te zien",
+        "De toelichtingen worden binnenkort toegevoegd. Kom straks nog eens terug.", "⧗");
+      return;
+    }
+    items.sort(function(a,b){ return (parseInt(nrKey(a.nummer),10)||0) - (parseInt(nrKey(b.nummer),10)||0); });
+    var h = '<p class="intro">Scan de QR-code bij een werk — of kies hieronder.</p><ul class="lijst">';
+    items.forEach(function(o){
+      var n = nrKey(o.nummer);
+      h += '<li><a href="?w='+esc(pad(n))+'">'+
+           '<span class="n">'+esc(pad(n))+'</span>'+
+           '<span class="t">'+esc(o.titel || ("Werk "+pad(n)))+
+           (o.kunstenaar ? '<span class="m">'+esc(o.kunstenaar)+'</span>' : "")+
+           '</span></a></li>';
+    });
+    h += '</ul>';
+    app.innerHTML = plaat(h);
+  }
+
+  /* ---------- data ophalen (met noodcache) ---------- */
+  var CACHE = "hpp30-cache-v1";
+  function laadCache(){ try{ var s = localStorage.getItem(CACHE); return s ? JSON.parse(s) : null; }catch(e){ return null; } }
+  function bewaarCache(d){ try{ localStorage.setItem(CACHE, JSON.stringify(d)); }catch(e){} }
+
+  function haal(){
+    var url = CFG.SHEET_CSV_URL || "";
+    if(!url || /PLAK_HIER/.test(url)) return Promise.reject(new Error("geen-sheet"));
+    var sep = url.indexOf("?") === -1 ? "?" : "&";
+    return fetch(url + sep + "t=" + Date.now(), {cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw new Error("http "+r.status); return r.text(); })
+      .then(function(txt){
+        var data = toObjects(parseCSV(txt));
+        if(data.length) bewaarCache(data);
+        return data;
+      });
+  }
+
+  function render(data, code){
+    if(!code){ toonOverzicht(data); return; }
+    var key = nrKey(code), o = null;
+    for(var i=0;i<data.length;i++){
+      if(nrKey(data[i].nummer) === key){ o = data[i]; break; }
+    }
+    if(heeftInhoud(o)) toonWerk(o, key);
+    else toonLeeg(key, "Nog geen uitleg bij dit werk",
+      "Bij nummer " + pad(key || code) + " is er nog niets toegevoegd. Kom straks nog eens terug.", "✦");
+  }
+
+  function start(){
+    var code = param();
+    haal()
+      .then(function(data){ render(data, code); })
+      .catch(function(err){
+        var c = laadCache();
+        if(c && c.length){ render(c, code); return; }
+        if(String(err.message) === "geen-sheet")
+          toonLeeg(null, "Nog even geduld",
+            "Deze gids is nog niet ingesteld. Zet de CSV-link van de Google Sheet bovenaan index.html.", "⚙");
+        else
+          toonLeeg(null, "Geen verbinding",
+            "De uitleg kon niet geladen worden. Controleer je internetverbinding en probeer opnieuw.", "⚡");
+      });
+  }
+
+  window.addEventListener("popstate", start);
+  start();
+})();
+</script>
+</body>
+</html>
