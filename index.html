@@ -91,8 +91,8 @@ header a{text-decoration:none;display:inline-flex;flex-direction:column;align-it
   vertical-align:middle;text-shadow:none;
 }
 .tagline{
-  font-family:"Playfair Display",Georgia,serif;font-size:19px;font-style:italic;
-  letter-spacing:.02em;text-transform:none;color:var(--brass);opacity:.85;
+  font-family:"Courier New",monospace;font-size:12.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--paper-dim);
 }
 .rule{
   height:3px;margin:18px auto 26px;max-width:340px;border-radius:2px;
@@ -471,6 +471,25 @@ footer{
     return '<div class="media">'+kop+'<a class="btn" href="'+esc(b.src)+'" target="_blank" rel="noopener">Openen</a></div>';
   }
 
+  /* Eén cel kan meerdere fragmenten bevatten: elk op een eigen regel
+     (Alt+Enter in Google Sheets), eventueel met een naam ervoor:
+        Inleiding | media/01a.mp3
+        De maker aan het woord | media/01b.mp3                        */
+  function mediaLijst(cel, voorkeur, standaard){
+    var regels = String(cel||"").split(/\r?\n/).map(function(s){ return s.trim(); }).filter(Boolean);
+    if(!regels.length) return "";
+    var meervoud = regels.length > 1;
+    return regels.map(function(regel, i){
+      var label = "", url = regel, p = regel.indexOf("|");
+      if(p > -1 && !/^\s*https?:\/\//i.test(regel.slice(0,p))){
+        label = regel.slice(0, p).trim();
+        url   = regel.slice(p + 1).trim();
+      }
+      if(!label) label = meervoud ? (standaard ? standaard + " " + (i+1) : "") : standaard;
+      return mediaHTML(url, voorkeur, label);
+    }).join("");
+  }
+
   function tekstHTML(t){
     if(!t) return "";
     var stukken = String(t).split(/\n+/).filter(function(s){ return s.trim(); });
@@ -491,9 +510,9 @@ footer{
     h += '<span class="pill">Nr. '+esc(pad(nr))+'</span>';
     h += '<h1 class="werk">'+esc(o.titel || ("Werk "+pad(nr)))+'</h1>';
     if(o.kunstenaar) h += '<p class="maker">'+esc(o.kunstenaar)+'</p>';
-    if(o.afbeelding) h += mediaHTML(o.afbeelding, "beeld", "");
-    if(o.audio)      h += mediaHTML(o.audio, "audio", "Luister");
-    if(o.video)      h += mediaHTML(o.video, "video", "Bekijk");
+    if(o.afbeelding) h += mediaLijst(o.afbeelding, "beeld", "");
+    if(o.audio)      h += mediaLijst(o.audio, "audio", "Luister");
+    if(o.video)      h += mediaLijst(o.video, "video", "Bekijk");
     if(o.tekst)      h += tekstHTML(o.tekst);
     app.innerHTML = plaat(h) + '<div class="knoprij"><a class="btn" href="./">Alle werken</a></div>';
     spelersActiveren();
