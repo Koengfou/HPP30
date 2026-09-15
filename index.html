@@ -26,6 +26,11 @@ window.HPP_CONFIG = {
 </script>
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 
+<!-- Bezoekersteller (GoatCounter — geen cookies, geen IP-adressen) -->
+<script>window.goatcounter = { no_onload: true };</script>
+<script data-goatcounter="https://huppeltijd.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
 <style>
 /* ============================================================
    KLEURPALET  (steampunk · brass + teal)  — Huppeltijd
@@ -300,6 +305,28 @@ footer{
     return '<div class="plaque"><span class="rivet-bl"></span><span class="rivet-br"></span>'+inner+'</div>';
   }
 
+  /* ---------- bezoekersteller ----------
+     Werkt met GoatCounter. Het script laadt asynchroon, dus wat we willen
+     tellen gaat eerst in een wachtrij en wordt weggeschreven zodra het
+     geladen is. Valt de teller weg, dan merkt de bezoeker daar niets van. */
+  var telRij = [];
+  function telVerder(){
+    if(!(window.goatcounter && typeof window.goatcounter.count === "function")) return;
+    while(telRij.length){
+      try{ window.goatcounter.count(telRij.shift()); }catch(e){ /* stil */ }
+    }
+  }
+  function tel(pad, titel, gebeurtenis){
+    telRij.push({ path: pad, title: titel, event: !!gebeurtenis });
+    telVerder();
+  }
+  (function(){
+    var n = 0, t = setInterval(function(){
+      telVerder();
+      if(++n > 40) clearInterval(t);   // tot 10 seconden proberen
+    }, 250);
+  })();
+
   /* ---------- CSV-parser (met aanhalingstekens en regeleindes in cellen) ---------- */
   function parseCSV(text){
     text = text.replace(/^﻿/,"");
@@ -405,10 +432,11 @@ footer{
     return m + ":" + (r < 10 ? "0"+r : r);
   }
 
-  function spelersActiveren(){
-    Array.prototype.forEach.call(document.querySelectorAll(".speler"), function(sp){
+  function spelersActiveren(werkNr){
+    Array.prototype.forEach.call(document.querySelectorAll(".speler"), function(sp, index){
       if(sp.dataset.klaar) return;
       sp.dataset.klaar = "1";
+      sp.dataset.geteld = "";
       var a = sp.querySelector("audio"),
           knop = sp.querySelector(".knop"),
           baan = sp.querySelector(".baan"),
@@ -434,7 +462,14 @@ footer{
           a.play();
         } else a.pause();
       });
-      a.addEventListener("play",  function(){ knop.innerHTML = ICOON_PAUZE; knop.setAttribute("aria-label","Pauzeren"); });
+      a.addEventListener("play",  function(){
+        knop.innerHTML = ICOON_PAUZE; knop.setAttribute("aria-label","Pauzeren");
+        if(!sp.dataset.geteld){        // één keer per bezoek, niet bij elke pauze
+          sp.dataset.geteld = "1";
+          tel("beluisterd-" + (werkNr || "?") + (index ? "-" + (index+1) : ""),
+              "Beluisterd: " + (werkNr || "?") + (index ? " · fragment " + (index+1) : ""), true);
+        }
+      });
       a.addEventListener("pause", function(){ knop.innerHTML = ICOON_PLAY;  knop.setAttribute("aria-label","Afspelen"); });
       a.addEventListener("ended", function(){ knop.innerHTML = ICOON_PLAY; a.currentTime = 0; teken(); });
       a.addEventListener("timeupdate", teken);
@@ -515,8 +550,9 @@ footer{
     if(o.video)      h += mediaLijst(o.video, "video", "Bekijk");
     if(o.tekst)      h += tekstHTML(o.tekst);
     app.innerHTML = plaat(h) + '<div class="knoprij"><a class="btn" href="./">Alle werken</a></div>';
-    spelersActiveren();
+    spelersActiveren(pad(nr));
     document.title = (o.titel ? o.titel + " — " : "") + (CFG.EXPO_TITEL||"Huppeltijd");
+    tel("/werk-" + pad(nr), pad(nr) + " — " + (o.titel || "zonder titel") + (o.kunstenaar ? " (" + o.kunstenaar + ")" : ""));
   }
 
   function toonOverzicht(werken){
@@ -538,6 +574,7 @@ footer{
     });
     h += '</ul>';
     app.innerHTML = plaat(h);
+    tel("/overzicht", "Overzicht — alle werken");
   }
 
   /* ---------- data ophalen (met noodcache) ---------- */
@@ -564,9 +601,10 @@ footer{
     for(var i=0;i<data.length;i++){
       if(nrKey(data[i].nummer) === key){ o = data[i]; break; }
     }
-    if(heeftInhoud(o)) toonWerk(o, key);
-    else toonLeeg(key, "Nog geen uitleg bij dit werk",
+    if(heeftInhoud(o)){ toonWerk(o, key); return; }
+    toonLeeg(key, "Nog geen uitleg bij dit werk",
       "Bij nummer " + pad(key || code) + " is er nog niets toegevoegd. Kom straks nog eens terug.", "✦");
+    tel("/leeg-" + pad(key || code), "Nog leeg: " + pad(key || code));
   }
 
   function start(){
