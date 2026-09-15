@@ -563,7 +563,7 @@ footer{
       return;
     }
     items.sort(function(a,b){ return (parseInt(nrKey(a.nummer),10)||0) - (parseInt(nrKey(b.nummer),10)||0); });
-    var h = '<p class="intro">Scan de QR-code bij een werk — of kies hieronder.</p><ul class="lijst">';
+    var h = '<p class="intro">Beste bezoeker, kies hieronder een werk uit de lijst.</p><ul class="lijst">';
     items.forEach(function(o){
       var n = nrKey(o.nummer);
       h += '<li><a href="?w='+esc(pad(n))+'">'+
